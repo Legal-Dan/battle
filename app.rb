@@ -1,5 +1,6 @@
 require 'sinatra'
 require "sinatra/reloader" if development?
+
 Sinatra::Reloader
 
 get '/' do
@@ -10,9 +11,13 @@ get '/secret' do
   "Secret things..."
 end
 
-get '/cat' do
+get '/random-cat' do
+  @name = ["Amigo", "Misty", "Almond"].sample
+  erb(:index)
+end
 
-  "<div style='border: 3px dashed red'>
-  <img src='https://i.imgur.com/jFaSxym.png'/>
-  </div>"
+get '/named-cat' do
+  p params
+  @name = params[:name]
+  erb(:index)
 end
